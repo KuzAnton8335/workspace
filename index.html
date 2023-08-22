@@ -4,8 +4,9 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>WorkSpace</title>
-		<link rel="stylesheet" href="css/normalize.css" />
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="index.css" />
+		<script src="js/choices.min.js" defer></script>
+		<script src="js/script.js" defer></script>
 	</head>
 	<body>
 		<!-- header -->
@@ -20,7 +21,7 @@
 		<!-- main -->
 		<main class="main">
 			<section class="hero">
-				<div class="container">
+				<div class="container hero__container">
 					<h1 class="hero__title">
 						Найди работу <span class="blue-text">своей мечты</span>
 					</h1>
@@ -29,6 +30,8 @@
 
 			<div class="vacansies" id="vacansies">
 				<div class="container vacansies__container">
+					<button class="vacansies__filter-btn">Фильтр</button>
+					<!-- filter -->
 					<section class="vacansies__filter filter">
 						<h2 class="filter__title">Фильтр</h2>
 						<form class="filter__form">
@@ -168,7 +171,9 @@
 							</div>
 						</form>
 					</section>
-					<section class="vacansises__cards card">
+					<!-- /filter -->
+					<!-- card -->
+					<section class="vacansises__cards cards">
 						<h2 class="cards__title visually-hidden">Список вакансий</h2>
 						<ul class="cards__list">
 							<li class="cards__item">
@@ -224,6 +229,7 @@
 							</li>
 						</ul>
 					</section>
+					<!-- /card -->
 				</div>
 			</div>
 		</main>

@@ -1,0 +1,18 @@
+.vacansises {
+	padding: 50px 0;
+}
+.vacansies__container {
+	display: flex;
+	align-items: start;
+	gap: 24px 20px;
+}
+
+.vacansies__filter-btn {
+	display: none;
+}
+.vacansies__filter {
+	flex: 0 0 280px;
+}
+.vacansises__cards {
+	flex-basis: 100%;
+}

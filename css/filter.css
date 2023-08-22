@@ -1,0 +1,79 @@
+.filter {
+	position: relative;
+}
+
+.filter__title {
+	color: #171717;
+	font-size: 20px;
+	margin-bottom: 3px;
+}
+
+.filter__reset {
+	position: absolute;
+	top: 7px;
+	right: 0;
+	color: #ccc;
+}
+
+.filter__form {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+.form__fieldset {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+}
+.filter__legend {
+	color: #171717;
+	font-size: 14px;
+	margin-bottom: 12px;
+}
+.fielter__select {
+	width: 100%;
+}
+.filter__range {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.filter__label {
+	margin-bottom: 8px;
+}
+
+.filter__label:last-child {
+	margin-bottom: 0;
+}
+
+.filter__input {
+	flex: 1 1 50%;
+	width: 100%;
+	padding: 0 16px;
+	height: 32px;
+	border: none;
+}
+
+.filter__input::placeholder {
+	color: #ccc;
+}
+
+.filter__checkboxes {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+/*
+
+.checkbox {
+}
+.checkbox__input {
+} */
+
+.filter__button {
+	padding: 8px 24px;
+	border-radius: 4px;
+	background-color: #a6adff;
+}
