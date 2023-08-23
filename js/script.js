@@ -9,11 +9,10 @@ const VACANCY_URL = "api/vacancy";
 
 const getData = async (url, cbSucces, cbError) => {
 	try {
-		const response = await fetch(url);
+		const response = await fetch(url)
 		const data = await response.json();
 		cbSucces(data)
 	}
-
 	catch (err) {
 		cbError(err)
 	}
@@ -53,7 +52,7 @@ const renderVacancy = (data, cardsList) => {
 	const cards = createCards(data);
 	cardsList.append(...cards);
 };
-const renderError = err => {
+const renderError = (err) => {
 	console.warn(err);
 }
 
@@ -122,7 +121,7 @@ const renderModal = (data) => {
 	modalClose.classList.add('modal__close');
 	modalClose.innerHTML =
 		`
-	< svg
+	<svg
 width = "20"
 height = "20"
 viewBox = "0 0 20 20"
@@ -134,7 +133,7 @@ xmlns = "http://www.w3.org/2000/svg" >
 			fill="#CCCCCC"
 		/>
 	</g>
-</ >
+</svg >
 	`
 	modalMain.append(modalClose);
 	modal.append(modalMain);
@@ -144,7 +143,7 @@ xmlns = "http://www.w3.org/2000/svg" >
 
 const openModal = (id) => {
 	console.log(id);
-	getData(`${API_URL}${VACANCY_URL} /${id}`, renderModal, renderError);
+	getData(`${API_URL}${VACANCY_URL}/${id}`, renderModal, renderError);
 }
 
 const init = () => {
