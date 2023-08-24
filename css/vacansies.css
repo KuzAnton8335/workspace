@@ -16,3 +16,50 @@
 .vacansises__cards {
 	flex-basis: 100%;
 }
+
+@media (max-width: 1140px) {
+	.vacansies {
+		padding: 40px 0;
+	}
+}
+
+@media (max-width: 940px) {
+	.vacansies {
+		padding: 40px 0;
+	}
+
+	.vacansies__container {
+		flex-direction: column;
+	}
+
+	.vacansies__filter-btn {
+		display: flex;
+		align-items: center;
+	}
+
+	.vacansies__filter-btn::after {
+		content: "";
+		display: block;
+		width: 20px;
+		height: 20px;
+		background: url("../img/arrow-blue.svg");
+		background-repeat: no-repeat;
+		background-repeat: center;
+	}
+
+	.vacansies__filter-btn_active::after {
+		transform: rotate(180deg);
+	}
+
+	.vacansies__filter {
+		width: 100%;
+		flex-basis: auto;
+		height: 0;
+		overflow: hidden;
+		transition: height 0.4s ease-in-out;
+	}
+
+	.vacansies__filter_active {
+		height: auto;
+	}
+}

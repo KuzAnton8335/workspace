@@ -3,7 +3,8 @@
 }
 .hero__container {
 	position: relative;
-	padding: 57px 0;
+	padding-top: 57px;
+	padding-bottom: 57px;
 }
 
 .hero__container::after {
@@ -11,16 +12,59 @@
 	position: absolute;
 	right: -9px;
 	top: 0;
+	bottom: 0;
 	width: 421px;
-	height: 330px;
 	background-image: url("../img/laptop.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 }
 .hero__title {
+	position: relative;
+	z-index: 2;
 	max-width: 780px;
 	font-size: 90px;
 	letter-spacing: 1.8px;
 	text-transform: uppercase;
+}
+
+@media (max-width: 1140px) {
+	.hero {
+		padding: 40px 0;
+	}
+
+	.hero__container {
+		padding-top: 53px;
+		padding-bottom: 53px;
+	}
+
+	.hero__container::after {
+		width: 340px;
+	}
+	.hero__title {
+		max-width: 580px;
+		font-size: 64px;
+		letter-spacing: 1.28px;
+	}
+}
+
+@media (max-width: 940px) {
+	.hero {
+		padding: 30px 0;
+	}
+
+	.hero__container {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+
+	.hero__container::after {
+		width: 269px;
+	}
+
+	.hero__title {
+		max-width: 450px;
+		font-size: 52px;
+		letter-spacing: 1.04px;
+	}
 }

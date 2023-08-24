@@ -30,3 +30,9 @@
 .footer__link:hover {
 	color: brown;
 }
+
+@media (max-width: 1140px) {
+	.footer {
+		padding: 40px 0 32px;
+	}
+}
