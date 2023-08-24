@@ -5,6 +5,11 @@ const LOCATION_URL = "api/locations";
 // связь для данных о вакансиях
 const VACANCY_URL = "api/vacancy";
 
+const cardsList = document.querySelector('.cards__list')
+let lastUrl = "";
+const pagination = {
+
+}
 
 
 const getData = async (url, cbSucces, cbError) => {
@@ -12,6 +17,7 @@ const getData = async (url, cbSucces, cbError) => {
 		const response = await fetch(url)
 		const data = await response.json();
 		cbSucces(data)
+
 	}
 	catch (err) {
 		cbError(err)
@@ -47,11 +53,41 @@ const createCards = (data) =>
 	})
 
 
-const renderVacancy = (data, cardsList) => {
+const renderVacancies = (data) => {
+
 	cardsList.textContent = "";
 	const cards = createCards(data);
 	cardsList.append(...cards);
+	if (data.pagination) {
+		Object.assign(pagination, data.pagination)
+	}
+	observer.observe(cardsList.lastElementChild);
 };
+
+const renderMoreVacancies = (data) => {
+	const cardsList = document.querySelector('.cards__list')
+	const cards = createCards(data);
+	cardsList.append(...cards);
+	if (data.pagination) {
+		Object.assign(pagination, data.pagination)
+	}
+	observer.observe(cardsList.lastElementChild);
+};
+
+const loadMoreVacacies = () => {
+
+	if (pagination.totalPages > pagination.currentPage) {
+		const urlWithParams = new URL(lastUrl);
+		urlWithParams.searchParams.set('page', pagination.currentPage + 1);
+		urlWithParams.searchParams.set('limit', window.innerWidth < 768 ? 6 : 12)
+
+		getData(urlWithParams, renderMoreVacancies, renderError).then(() => {
+			lastUrl = urlWithParams;
+		})
+	}
+
+};
+
 const renderError = (err) => {
 	console.warn(err);
 }
@@ -111,7 +147,6 @@ const creatDetailVacancy = ({
 
 
 const renderModal = (data) => {
-	console.log(data);
 	const modal = document.createElement('div');
 	modal.classList.add('modal');
 	const modalMain = document.createElement('div');
@@ -138,16 +173,34 @@ xmlns = "http://www.w3.org/2000/svg" >
 	modalMain.append(modalClose);
 	modal.append(modalMain);
 	document.body.append(modal);
-
+	modal.addEventListener('click', ({ target }) => {
+		if (target === modal || target.closest(".modal__close")) {
+			modal.remove();
+		}
+	})
 }
 
 const openModal = (id) => {
-	console.log(id);
 	getData(`${API_URL}${VACANCY_URL}/${id}`, renderModal, renderError);
 }
 
+const observer = new IntersectionObserver(
+	(entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				loadMoreVacacies();
+			}
+		})
+	}, {
+	rootMargin: "100px",
+}
+)
+
+
+
 const init = () => {
-	const cardsList = document.querySelector('.cards__list');
+	const filterForm = document.querySelector('.filter__form');
+	// const cardsList = document.querySelector('.cards__list');
 	//custom select js настройки
 	const citySelect = document.querySelector("#city");
 	const cityChoices = new Choices(citySelect, {
@@ -165,19 +218,34 @@ const init = () => {
 		},)
 
 	// cards
-	const url = new URL(`${API_URL}${VACANCY_URL}`);
+	const urlWithParams = new URL(`${API_URL}${VACANCY_URL}`);
 
-	getData(url, (data) => {
-		renderVacancy(data, cardsList)
-	}, renderError);
+	urlWithParams.searchParams.set('limit', window.innerWidth < 768 ? 6 : 12)
+	urlWithParams.searchParams.set('page', 1)
+	getData(urlWithParams, renderVacancies, renderError).then(() => {
+		lastUrl = urlWithParams;
+	})
 
+	//modal
 	cardsList.addEventListener('click', ({ target }) => {
 		const vacancyCard = target.closest('.vacancy');
-		console.log(vacancyCard);
 		if (vacancyCard) {
 			const vacancyId = vacancyCard.dataset.id;
 			openModal(vacancyId)
 		}
+	})
+
+	//filter-form
+	filterForm.addEventListener('submit', (event) => {
+		event.preventDefault();
+		const formData = new FormData(filterForm);
+		const urlWithParam = new URL(`${API_URL}${VACANCY_URL}`);
+		formData.forEach((value, key) => {
+			urlWithParam.searchParams.append(key, value)
+		})
+		getData(urlWithParam, renderVacancies, renderError).then(() => {
+			lastUrl = urlWithParam;
+		});
 	})
 }
 
