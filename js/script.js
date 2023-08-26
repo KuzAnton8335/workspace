@@ -108,9 +108,6 @@ const creatDetailVacancy = ({
 	`
 <div class="modal__body">
 				<article class="modal__container">
-					<div class="modal__like">
-						<img src="img/modal-img.png" alt="" />
-					</div>
 					<div class="modal__header">
 						<img
 							src="${API_URL}${logo}"

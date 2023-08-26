@@ -30,6 +30,7 @@
 
 	.vacansies__container {
 		flex-direction: column;
+		row-gap: 40px;
 	}
 
 	.vacansies__filter-btn {
@@ -61,5 +62,15 @@
 
 	.vacansies__filter_active {
 		height: auto;
+	}
+
+	.vacansises__cards {
+		width: 100%;
+	}
+}
+
+@media (max-width: 640px) {
+	.vacansies__container {
+		gap: 24px;
 	}
 }
