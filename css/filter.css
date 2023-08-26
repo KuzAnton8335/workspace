@@ -5,7 +5,7 @@
 .filter__title {
 	color: #171717;
 	font-size: 20px;
-	margin-bottom: 3px;
+	margin-bottom: 33px;
 }
 
 .filter__reset {
@@ -18,7 +18,7 @@
 .filter__form {
 	display: flex;
 	flex-direction: column;
-	gap: 32px;
+	gap: 29px;
 }
 .form__fieldset {
 	display: flex;

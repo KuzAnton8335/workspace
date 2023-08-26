@@ -45,11 +45,12 @@
 
 @media (max-width: 640px) {
 	.footer {
-		padding-top: 20px;
+		padding-top: 38px;
 	}
 
 	.footer__container {
 		grid-template-areas: "logo" "copyright" "contacts";
+		gap: 24px;
 	}
 
 	.footer__contacts {

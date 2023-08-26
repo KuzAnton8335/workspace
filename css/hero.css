@@ -72,7 +72,7 @@
 @media (max-width: 640px) {
 	.hero {
 		padding-top: 20px;
-		padding-bottom: 20px;
+		padding-bottom: 6px;
 	}
 
 	.hero__container {

@@ -193,11 +193,51 @@ const observer = new IntersectionObserver(
 }
 )
 
+const openFilter = (btn, dropDown, classNameBtn, classNameDd) => {
+	dropDown.style.height = `${dropDown.scrollHeight}px`;
+	btn.classList.add(classNameBtn);
+	dropDown.classList.add(classNameDd);
+}
 
+
+const closeFilter = (btn, dropDown, classNameBtn, classNameDd) => {
+
+	btn.classList.remove(classNameBtn);
+	dropDown.classList.remove(classNameDd);
+	dropDown.style.height = '';
+}
 
 const init = () => {
 	const filterForm = document.querySelector('.filter__form');
 	// const cardsList = document.querySelector('.cards__list');
+	const vacansiesFilterBtn = document.querySelector('.vacansies__filter-btn');
+	const vacansisFilter = document.querySelector('.vacansies__filter');
+
+	vacansiesFilterBtn.addEventListener('click', () => {
+		if (vacansiesFilterBtn.classList.contains('vacansies__filter-btn_active')) {
+			closeFilter(vacansiesFilterBtn,
+				vacansisFilter,
+				'vacansies__filter-btn_active',
+				'vacansies__filter_active')
+		}
+		else {
+			openFilter(vacansiesFilterBtn,
+				vacansisFilter,
+				'vacansies__filter-btn_active',
+				'vacansies__filter_active')
+		}
+	})
+
+	window.addEventListener('resize', () => {
+		if (vacansiesFilterBtn.classList.contains('vacansies__filter-btn_active')) {
+			// vacansisFilter.style.height = `${vacansisFilter.scrollHeight}px`;
+			closeFilter(vacansiesFilterBtn,
+				vacansisFilter,
+				'vacansies__filter-btn_active',
+				'vacansies__filter_active')
+		}
+
+	})
 	//custom select js настройки
 	const citySelect = document.querySelector("#city");
 	const cityChoices = new Choices(citySelect, {
@@ -232,6 +272,15 @@ const init = () => {
 		}
 	})
 
+	cardsList.addEventListener('keydown', ({ code, target }) => {
+		const vacancyCard = target.closest('.vacancy')
+		if (code === 'Enter' || code === 'NumbadEnter' && target.closest('.vacancy')) {
+			const vacancyId = vacancyCard.dataset.id
+			openModal(vacancyId);
+			target.blur();
+		}
+	})
+
 	//filter-form
 	filterForm.addEventListener('submit', (event) => {
 		event.preventDefault();
@@ -242,6 +291,11 @@ const init = () => {
 		})
 		getData(urlWithParam, renderVacancies, renderError).then(() => {
 			lastUrl = urlWithParam;
+		}).then(() => {
+			closeFilter(vacansiesFilterBtn,
+				vacansisFilter,
+				'vacansies__filter-btn_active',
+				'vacansies__filter_active')
 		});
 	})
 }
